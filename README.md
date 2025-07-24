@@ -6,6 +6,8 @@ You can use it to interact with your own compact assistant model that remembers 
 For convenience, I added a voice input and simple GUI to communicate faster and more productive.
 
 ---
+## 🔥 DEMO
+![](demo/output.gif)
 
 ## 🔒 Why?
 
