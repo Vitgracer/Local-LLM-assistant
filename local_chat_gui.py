@@ -1,12 +1,11 @@
-import tkinter as tk
-from tkinter import scrolledtext
-import threading
-import queue
-import sounddevice as sd
 import json
-from vosk import Model, KaldiRecognizer
 import yaml
+import queue
+import threading
+import tkinter as tk
+import sounddevice as sd
 from argparse import Namespace
+from tkinter import scrolledtext
 
 from chat.loaders import (
     get_chat_history,
@@ -22,14 +21,14 @@ class VoiceChatApp:
     def __init__(self, root):
         self.root = root
         self.root.title("🎙️ Voice Chatbot")
-        self.root.geometry("700x600")
-        self.root.configure(bg="#f5f7fa")
+        self.root.geometry("450x700")
+        self.root.configure(bg="#83ace9")
         self.audio_q = queue.Queue()
 
         self.setup_model()
         self.setup_ui()
 
-        self.listen_and_respond()  # Start the first mic listen
+        self.listen_and_respond()
 
     def mic_callback(self, indata, frames, time, status):
         self.audio_q.put(bytes(indata))
