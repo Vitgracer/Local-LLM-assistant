@@ -24,4 +24,5 @@ def chat_with_model(model, tokenizer, chat_history, config):
 
     print(f"Assistant: {response}")
     print(f"Generation took {end - start:.2f} seconds.")
+    print("-------------------------------------------")
     return response
