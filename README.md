@@ -1,4 +1,4 @@
-# Local-LLM-assistant
+# Local-Voice-LLM-assistant
 This project is an experiment in **running small but capable language models entirely offline** on your own laptop. The goal is to create a **private, local AI assistant** that does **not send your data anywhere**, with full control over the model and the process — no cloud, no telemetry, and no limitations.
 
 You can use it to interact with your own compact assistant model that remembers context, follows system instructions, and generates helpful responses — **all locally on your machine**.
