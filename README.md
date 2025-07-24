@@ -3,6 +3,8 @@ This project is an experiment in **running small but capable language models ent
 
 You can use it to interact with your own compact assistant model that remembers context, follows system instructions, and generates helpful responses — **all locally on your machine**.
 
+For convenience, I added a voice input and simple GUI to communicate faster and more productive.
+
 ---
 
 ## 🔒 Why?
@@ -11,14 +13,17 @@ You can use it to interact with your own compact assistant model that remembers 
 - 💡 **Hackable**: Full control over generation, logic, prompts
 - 🧪 **Experimental**: Try different models, quantizations, and runtimes
 - 💻 **Runs on consumer GPUs**
+- 😂 **TO HAVE FUN!** 
 
 ---
 
-## 🤖 Model Used
+## 🤖 Models Used
 
-We use [`HuggingFaceTB/SmolLM3-3B`](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) — a compact 3B parameter chat-tuned model.
+I use [`HuggingFaceTB/SmolLM3-3B`](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) — a compact 3B parameter chat-tuned model.
 
 **Massive thanks and respect** to the authors of SmolLM3 and the HuggingFace community for making these tools open and accessible!
+
+As for voice recognition, [`vosk`](https://pypi.org/project/vosk/) is super option to make all the things quick and with high quality! 
 
 ---
 ## 🚀 Setup Instructions
@@ -51,6 +56,8 @@ Run the assistant with context and a system prompt using the included script.
 - Supports a system role message
 - Uses 4-bit quantized loading with bitsandbytes
 - Optimized for fast response time
+- Supports voice input 
+- Supports simple GUI 
 
 To chat interactively, run:
 ```bash
