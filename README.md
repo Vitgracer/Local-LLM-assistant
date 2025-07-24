@@ -33,9 +33,14 @@ assistant_venv\Scripts\activate
 
 ### 2. Install Dependencies (for CUDA 12.4 and Torch 2.5.1)
 ```bash
+# for llm
 pip3 install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
 pip3 install -U transformers accelerate bitsandbytes
+# for voice recognition 
+pip install vosk sounddevice
 ```
+Also, don't forget to download the [`vosk model`](https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip) and put it into **project/voice/models**.
+I used the fastest version, but you can play with different one.
 
 ### 3. 💬 Usage
 Run the assistant with context and a system prompt using the included script.
