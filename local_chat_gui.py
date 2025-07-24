@@ -59,15 +59,30 @@ class VoiceChatApp:
 
     def setup_ui(self):
         self.chat_log = scrolledtext.ScrolledText(
-            self.root, wrap=tk.WORD, font=("Segoe UI", 11), bg="white", fg="#333"
+            self.root, wrap=tk.WORD, font=("Fira Sans", 11), bg="white", fg="#333"
         )
         self.chat_log.pack(padx=20, pady=20, fill=tk.BOTH, expand=True)
-        self.chat_log.insert(tk.END, "🤖 Assistant ready. Say something...\n")
+
+        # Define color tags
+        self.chat_log.tag_config("user", foreground="#1a73e8")
+        self.chat_log.tag_config("assistant", foreground="#811212")
+        self.chat_log.tag_config("info", foreground="#080000")
+
+        self.chat_log.insert(tk.END, "🤖 Assistant ready. Say something...\n", "info")
         self.chat_log.configure(state='disabled')
 
     def append_message(self, sender, message):
         self.chat_log.configure(state='normal')
-        self.chat_log.insert(tk.END, f"{sender}: {message}\n")
+
+        # Choose tag based on sender
+        if sender.startswith("🧑"):
+            tag = "user"
+        elif sender.startswith("🤖"):
+            tag = "assistant"
+        else:
+            tag = "info"
+
+        self.chat_log.insert(tk.END, f"{sender}: {message}\n", tag)
         self.chat_log.see(tk.END)
         self.chat_log.configure(state='disabled')
 
