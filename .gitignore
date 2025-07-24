@@ -4,3 +4,4 @@ voice/models
 __pycache__/voice.cpython-310.pyc
 voice/__pycache__/loaders.cpython-310.pyc
 voice/__pycache__/processing.cpython-310.pyc
+*.mkv
