@@ -87,3 +87,9 @@ This is a lightweight personal assistant that respects your data and your contro
 - Personal journaling or reminders
 - Local experiments with new models
 - Happy tinkering — and thanks again to all open-source LLM developers! 😍😍😍
+
+### 🌟 Like it? Star it!
+
+If this little offline AI assistant made you smile — don’t forget to smash that ⭐️ button!
+
+[![Star](https://img.shields.io/github/stars/Vitgracer/Offline-Voice-LLM-assistant?style=social)](https://github.com/Vitgracer/Offline-Voice-LLM-assistant)
