@@ -56,6 +56,10 @@ To chat interactively, run:
 ```bash
 python local_chat.py
 ```
+or if you prefer GUI-like bot: 
+```bash
+python local_chat_gui.py
+```
 
 ### 🧪 Optional: Further Optimization
 If you want to push performance further on Linux, you can explore:
