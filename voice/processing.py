@@ -8,5 +8,5 @@ def get_audio_input(q, rec):
         if rec.AcceptWaveform(data):
             result = json.loads(rec.Result()).get("text", "")
             if result:
-                print("You said:", result)
+                print("\nYou said:", result)
                 return result

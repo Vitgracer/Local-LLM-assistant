@@ -9,7 +9,7 @@ def chat_with_model(model, tokenizer, chat_history, config):
         add_generation_prompt=True,
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-    print("generating response...")
+    print("\ngenerating response...")
 
     start = time.time()
     with torch.no_grad():
@@ -20,9 +20,9 @@ def chat_with_model(model, tokenizer, chat_history, config):
     end = time.time()
 
     output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :]
-    response = tokenizer.decode(output_ids, skip_special_tokens=True)
+    response = tokenizer.decode(output_ids, skip_special_tokens=True).replace("<think>", "").replace("</think>", "").lstrip()
 
-    print(f"Assistant: {response}")
-    print(f"Generation took {end - start:.2f} seconds.")
+    print(f"\nAssistant: {response}")
+    print(f"\nGeneration took {end - start:.2f} seconds.")
     print("-------------------------------------------")
     return response
