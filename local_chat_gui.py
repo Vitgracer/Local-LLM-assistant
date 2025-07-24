@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import scrolledtext
-from tkinter import ttk
 import threading
 import queue
 import sounddevice as sd
@@ -25,7 +24,8 @@ audio_q = queue.Queue()
 def mic_callback(indata, frames, time, status):
     audio_q.put(bytes(indata))
 
-def voice_listener(callback):
+def listen_once():
+    """Captures a single voice input and returns text (blocking)."""
     with sd.RawInputStream(samplerate=16000, blocksize=8000, dtype='int16',
                            channels=1, callback=mic_callback):
         while True:
@@ -34,21 +34,20 @@ def voice_listener(callback):
                 result = json.loads(recognizer.Result())
                 text = result.get("text", "").strip()
                 if text:
-                    callback(text)
+                    return text
 
-# Chat UI
-class ChatApp:
+# === Chat UI ===
+class VoiceChatApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Local Voice Chat")
+        self.root.title("🎙️ Voice Chatbot")
         self.root.geometry("700x600")
-        self.root.configure(bg="#f0f2f5")
+        self.root.configure(bg="#f5f7fa")
 
         self.setup_model()
         self.setup_ui()
 
-        # Start background voice listener
-        threading.Thread(target=voice_listener, args=(self.on_voice_input,), daemon=True).start()
+        self.listen_and_respond()  # Start the first mic listen
 
     def setup_model(self):
         with open("config.yaml", "r") as f:
@@ -61,38 +60,12 @@ class ChatApp:
         self.chat_history = get_chat_history(self.config.system_prompt)
 
     def setup_ui(self):
-        # Chat log (scrollable)
-        self.chat_log = scrolledtext.ScrolledText(self.root, wrap=tk.WORD, font=("Segoe UI", 11), bg="white", fg="#333")
-        self.chat_log.pack(padx=20, pady=(20,10), fill=tk.BOTH, expand=True)
-        self.chat_log.insert(tk.END, "🤖 Assistant ready. Say something or type below.\n")
+        self.chat_log = scrolledtext.ScrolledText(
+            self.root, wrap=tk.WORD, font=("Segoe UI", 11), bg="white", fg="#333"
+        )
+        self.chat_log.pack(padx=20, pady=20, fill=tk.BOTH, expand=True)
+        self.chat_log.insert(tk.END, "🤖 Assistant ready. Say something...\n")
         self.chat_log.configure(state='disabled')
-
-        # Input field
-        input_frame = ttk.Frame(self.root)
-        input_frame.pack(fill=tk.X, padx=20, pady=10)
-
-        self.input_var = tk.StringVar()
-        self.input_entry = ttk.Entry(input_frame, textvariable=self.input_var, font=("Segoe UI", 11))
-        self.input_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
-        self.input_entry.bind("<Return>", self.send_input)
-
-        send_btn = ttk.Button(input_frame, text="Send", command=self.send_input)
-        send_btn.pack(side=tk.RIGHT)
-
-    def send_input(self, event=None):
-        user_input = self.input_var.get().strip()
-        if not user_input:
-            return
-        self.input_var.set("")
-        self.append_message("🧑 You", user_input)
-        threading.Thread(target=self.process_user_input, args=(user_input,), daemon=True).start()
-
-    def on_voice_input(self, voice_text):
-        self.root.after(0, lambda: self.handle_voice_input(voice_text))
-
-    def handle_voice_input(self, text):
-        self.append_message("🎙 You (voice)", text)
-        threading.Thread(target=self.process_user_input, args=(text,), daemon=True).start()
 
     def append_message(self, sender, message):
         self.chat_log.configure(state='normal')
@@ -100,15 +73,25 @@ class ChatApp:
         self.chat_log.see(tk.END)
         self.chat_log.configure(state='disabled')
 
-    def process_user_input(self, user_input):
-        self.chat_history.append({"role": "user", "content": user_input})
-        response = chat_with_model(self.model, self.tokenizer, self.chat_history, self.config)
-        self.chat_history.append({"role": "assistant", "content": response})
-        self.root.after(0, lambda: self.append_message("🤖 Assistant", response))
+    def listen_and_respond(self):
+        threading.Thread(target=self._listen_and_respond_worker, daemon=True).start()
+
+    def _listen_and_respond_worker(self):
+        self.root.after(0, lambda: self.append_message("🎤 Listening...", "(waiting for input)"))
+        voice_input = listen_once()
+        self.root.after(0, lambda: self.append_message("🧑 You", voice_input))
+
+        self.chat_history.append({"role": "user", "content": voice_input})
+        assistant_reply = chat_with_model(self.model, self.tokenizer, self.chat_history, self.config)
+        self.chat_history.append({"role": "assistant", "content": assistant_reply})
+        self.root.after(0, lambda: self.append_message("🤖 Assistant", assistant_reply))
+
+        # Start next listening cycle
+        self.listen_and_respond()
 
 
-# === Run the App ===
+# === Launch the App ===
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ChatApp(root)
+    app = VoiceChatApp(root)
     root.mainloop()
