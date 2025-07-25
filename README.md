@@ -1,4 +1,4 @@
-![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=vitgracer.Offline-Voice-LLM-Assistant)
+![](https://api.visitorbadge.io/api/VisitorHit?user=Vitgracer&repo=Offline-Voice-LLM-Assistant&countColor=%237B1E7A)
 
 # Offline-Voice-LLM-assistant
 This project is an experiment in **running small but capable language models entirely offline** on your own laptop. The goal is to create a **private, local AI assistant** that does **not send your data anywhere**, with full control over the model and the process — no cloud, no telemetry, and no limitations.
