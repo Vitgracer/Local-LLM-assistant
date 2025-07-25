@@ -94,4 +94,4 @@ This is a lightweight personal assistant that respects your data and your contro
 
 If this little offline AI assistant made you smile — don’t forget to smash that ⭐️ button!
 
-[![Star](https://img.shields.io/github/stars/Vitgracer/Offline-Voice-LLM-assistant?style=social)](https://github.com/Vitgracer/Offline-Voice-LLM-assistant)
+[![Star](https://img.shields.io/github/stars/Vitgracer/Offline-Voice-LLM-assistant?style=social)](https://github.com/Vitgracer/Offline-Voice-LLM-Assistant)
