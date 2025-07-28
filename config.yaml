@@ -7,6 +7,8 @@ system_prompt: You are a highly concise technical assistant.
                Use equations or code snippets when helpful. 
                Do not explain basics unless asked. 
                Respond as if speaking to an advanced practitioner or researcher.
+
+# we can use more, but generation will be slower
 max_new_tokens: 256
 
 # voice configs (vosk)
