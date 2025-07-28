@@ -1,2 +1,3 @@
+# used to prepare demo 
 ffmpeg -i demo.mkv -filter:v "crop=500:1000:1419:0" output.mkv
 ffmpeg.exe -i cut.mkv -vf "fps=10,scale=500:-1:flags=lanczos" output.gif
