@@ -23,7 +23,9 @@ For convenience, I added a voice input and simple GUI to communicate faster and 
 
 ## 🤖 Models Used
 
-I use [`HuggingFaceTB/SmolLM3-3B`](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) — a compact 3B parameter chat-tuned model.
+I use [`HuggingFaceTB/SmolLM3-3B`](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) — a compact 3B parameter chat-tuned model. It is licensed under the Apache License 2.0.  
+
+The full text of the Apache License 2.0 is included in the `LICENSE` file in this repository.
 
 **Massive thanks and respect** to the authors of SmolLM3 and the HuggingFace community for making these tools open and accessible!
 
