@@ -9,7 +9,7 @@ Here’s how you can contribute:
    Create your own copy of the repository by forking it.
 
 3. **Create a Branch**  
-   Work on your changes in a separate branch to keep your work organized. For example:
+   Work on your changes in a separate branch to keep your work organized.
 
 4. **Make Changes and Test**
 Implement your feature or fix. Test your changes locally to make sure everything works as expected.
